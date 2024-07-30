@@ -1,0 +1,22 @@
+
+ import "./user.zmodel"  
+ import "./analysisResult.zmodel"  
+ import "./report.zmodel"  
+ import "./complianceSummary.zmodel"  
+
+model LogFile {
+
+    id        String    @id @default(uuid())  
+    filePathUrl String      
+    uploadDate String      
+    complianceFramework String      
+    userId    String      
+    user      User?      @relation(fields: [userId], references: [id], name:"user")  
+
+analysisResults AnalysisResult[] @relation("logFile")  
+    reports   Report[]  @relation("logFile")  
+    complianceSummarys ComplianceSummary[] @relation("logFile")  
+      dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

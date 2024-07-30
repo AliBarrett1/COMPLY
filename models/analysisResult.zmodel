@@ -1,0 +1,20 @@
+
+ import "./logFile.zmodel"  
+ import "./requirement.zmodel"  
+
+model AnalysisResult {
+
+    id        String    @id @default(uuid())  
+    status    String      
+    relevantInfo String?      
+    identifiedIssues String?      
+    suggestedImprovements String?      
+    logFileId String      
+    logFile   LogFile?   @relation(fields: [logFileId], references: [id], name:"logFile")  
+    requirementId String      
+    requirement Requirement? @relation(fields: [requirementId], references: [id], name:"requirement")  
+
+dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

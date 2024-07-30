@@ -1,0 +1,18 @@
+
+ import "./user.zmodel"  
+ import "./logFile.zmodel"  
+
+model Report {
+
+    id        String    @id @default(uuid())  
+    generatedDate String      
+    content   String      
+    userId    String      
+    user      User?      @relation(fields: [userId], references: [id], name:"user")  
+    logFileId String      
+    logFile   LogFile?   @relation(fields: [logFileId], references: [id], name:"logFile")  
+
+dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

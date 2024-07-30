@@ -1,0 +1,18 @@
+
+ import "./logFile.zmodel"  
+
+model ComplianceSummary {
+
+    id        String    @id @default(uuid())  
+    totalRequirements Float       
+    metRequirements Float       
+    notMetRequirements Float       
+    partiallyMetRequirements Float       
+    complianceScore Float       
+    logFileId String      
+    logFile   LogFile?   @relation(fields: [logFileId], references: [id], name:"logFile")  
+
+dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}

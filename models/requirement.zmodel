@@ -1,0 +1,14 @@
+
+ import "./analysisResult.zmodel"  
+
+model Requirement {
+
+    id        String    @id @default(uuid())  
+    complianceFramework String      
+    description String      
+
+analysisResults AnalysisResult[] @relation("requirement")  
+      dateCreated DateTime @default(now())
+      dateUpdated DateTime @updatedAt  @default(now())
+      @@allow("all", true)
+}
